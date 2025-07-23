@@ -224,7 +224,7 @@ function getWaybackUrls($domain) {
 
         // Добавляем кнопку "Показать все"
         if (count($urls) > 50) {
-            $result .= "<button id='show-all-urls'>Показать все результаты</button>";
+            $result .= "<button id='show-all-urls'>Show all results</button>";
         }
 
         return $result;
@@ -1560,8 +1560,8 @@ function checkSecurityHeaders($domain) {
     $results = [];
     foreach ($requiredHeaders as $header => $warning) {
         $results[] = isset($headersAssoc[$header])
-            ? "<strong>$header:</strong> Найден ✅"
-            : "<strong>$header:</strong> Отсутствует ❌ ($warning)";
+            ? "<strong>$header:</strong> Found ✅"
+            : "<strong>$header:</strong> Absent ❌ ($warning)";
     }
 
     // Возвращаем результаты
