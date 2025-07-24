@@ -132,7 +132,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['global_domain'])) {
 
 // Функция для фильтрации nslookup вывода
 function filterNslookupOutput($output) {
-    $removeLines = ['unknown query type: ALL', 'Server:', 'Non-authoritative answer:'];
+    $removeLines = ['unknown query type: ANY', 'Server:', 'Non-authoritative answer:'];
     $lines = explode("\n", $output);
     $filtered = array_filter($lines, function($line) use ($removeLines) {
         foreach ($removeLines as $rl) {
@@ -188,7 +188,7 @@ function scanSubdomains($domain) {
     foreach ($subdomains as $sub) {
         $fullDomain = "$sub.$domain";
         try {
-            $output = shell_exec("nslookup -query=ALL " . escapeshellarg($fullDomain));
+            $output = shell_exec("nslookup -query=ANY " . escapeshellarg($fullDomain));
             if (strpos($output, "NXDOMAIN") === false && strpos($output, "SERVFAIL") === false) {
                 $filteredOutput = filterNslookupOutput($output);
                 if (!empty(trim($filteredOutput))) {
